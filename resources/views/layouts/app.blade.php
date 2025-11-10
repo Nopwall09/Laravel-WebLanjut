@@ -10,9 +10,17 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" href="#">Aplikasi Produk</a>
-      <div class="collapse navbar-collapse">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a href="{{ url('/tampil-produk') }}" class="nav-link">Produk</a></li>
+          <li class="nav-item">
+            <a href="{{ url('/tampil-produk') }}" class="nav-link">Produk</a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('/tampil-kategori') }}" class="nav-link">Kategori</a>
+          </li>
         </ul>
       </div>
     </div>
