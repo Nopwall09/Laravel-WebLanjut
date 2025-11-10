@@ -1,36 +1,31 @@
-@extends('layouts.app')
-@section('title', 'Data Produk')
-@section('content')
-<div class="container mt-4">
-  <h3 class="mb-4">Data Produk</h3>
-  <a href="{{ route('produk.create') }}" class="btn btn-success mb-3">+ Tambah Produk</a>
-
-  <table class="table table-bordered table-striped">
-    <thead class="table-dark">
-      <tr>
-        <th>No</th>
-        <th>ID Produk</th>
-        <th>Nama Produk</th>
-        <th>Harga</th>
-        <th>Stock</th>
-        <th>Aksi</th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach ($dataProduk as $data)
-      <tr>
-        <td>{{ $loop->iteration }}</td>
-        <td>{{ $data->id }}</td>
-        <td>{{ $data->nama_produk }}</td>
-        <td>{{ number_format($data->harga,0,',','.') }}</td>
-        <td>{{ $data->stock }}</td>
-        <td>
-          <a href="{{ route('produk.edit', $data->id) }}" class="btn btn-warning btn-sm">Edit</a>
-          <a href="{{ route('produk.delete', $data->id) }}" class="btn btn-danger btn-sm">Hapus</a>
-        </td>
-      </tr>
-      @endforeach
-    </tbody>
-  </table>
-</div>
-@endsection
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Produk</title>
+</head>
+<body>
+    <h2>Data Produk</h2>
+    <a href="{{ route('produk.create') }}">+ New Data</a>
+    <table border="1" cellpadding="8" cellspacing="0">
+        <tr>
+            <th>No</th>
+            <th>Nama Produk</th>
+            <th>Harga</th>
+            <th>Stock</th>
+            <th>Aksi</th>
+        </tr>
+        @foreach($dataProduk as $data)
+        <tr>
+            <td>{{ $loop->iteration }}</td>
+            <td>{{ $data->nama_produk }}</td>
+            <td>Rp {{ number_format($data->harga) }}</td>
+            <td>{{ $data->stock }}</td>
+            <td>
+                <a href="{{ url('edit-produk/'.$data->id) }}">Edit</a> |
+                <a href="{{ url('hapus-produk/'.$data->id) }}">Hapus</a>
+            </td>
+        </tr>
+        @endforeach
+    </table>
+</body>
+</html>

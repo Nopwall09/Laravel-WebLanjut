@@ -1,25 +1,43 @@
-@extends('layouts.app')
-@section('title', 'Edit Produk')
-@section('content')
-<div class="container mt-4">
-  <h3>Edit Produk</h3>
-  <form action="{{ route('produk.update', $data->id) }}" method="POST">
-    @csrf
-    @method('PUT')
-    <div class="mb-3">
-      <label>Nama Produk</label>
-      <input type="text" name="nama_produk" class="form-control" value="{{ $data->nama_produk }}" required>
+<div class="modal fade" id="modalEditProduk{{ $data->id }}" tabindex="-1"
+    aria-labelledby="modalEditProdukLabel{{ $data->id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEditProdukLabel{{ $data->id }}">Edit Produk</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <form action="{{ route('produk.update', $data->id ) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Kode Produk</label>
+                        <input type="text" class="form-control" name="id" value="{{ $data->id }}" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Nama Produk</label>
+                        <input type="text" class="form-control" name="nama_produk" value="{{ $data->nama_produk }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Harga</label>
+                        <input type="number" class="form-control" name="harga" value="{{ $data->harga }}" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Stock</label>
+                        <input type="number" class="form-control" name="stock" value="{{ $data->stock }}" required>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="mb-3">
-      <label>Harga</label>
-      <input type="number" name="harga" class="form-control" value="{{ $data->harga }}" required>
-    </div>
-    <div class="mb-3">
-      <label>Stock</label>
-      <input type="number" name="stock" class="form-control" value="{{ $data->stock }}" required>
-    </div>
-    <button type="submit" class="btn btn-success">Update</button>
-    <a href="{{ route('produk.index') }}" class="btn btn-secondary">Kembali</a>
-  </form>
 </div>
-@endsection
