@@ -12,15 +12,26 @@
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label class="form-label">Kode Produk</label>
                         <input type="text" class="form-control" name="id" value="{{ $data->id }}" readonly>
-                    </div>
+                    </div> -->
 
                     <div class="mb-3">
                         <label class="form-label">Nama Produk</label>
                         <input type="text" class="form-control" name="nama_produk" value="{{ $data->nama_produk }}" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="kategori_id" class="form-label">Kategori</label>
+                        <select name="kategori_id" class="form-control" required>
+                            @foreach($kategori as $kat)
+                            <option value="{{ $kat->id }}" {{ $kat->id == $data->kategori_id ? 'selected' : '' }}>
+                                {{ $kat->nama_kategori }}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+
 
                     <div class="mb-3">
                         <label class="form-label">Harga</label>
