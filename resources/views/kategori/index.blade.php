@@ -1,36 +1,45 @@
-@extends('layouts.app')
-@section('title', 'Data Kategori')
+@extends('layouts.master')
+@section('title', 'Kategori')
 @section('content')
-<div class="container mt-4">
-  <h3 class="mb-4">Data Kategori</h3>
-  <a href="{{ route('kategori.create') }}" class="btn btn-success mb-3">+ Tambah Kategori</a>
-
-  <table class="table table-bordered table-striped">
-    <thead class="table-dark">
-      <tr>
-        <th>No</th>
-        <th>ID</th>
-        <th>Nama Kategori</th>
-        <th>Aksi</th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach ($dataKategori as $data)
-      <tr>
-        <td>{{ $loop->iteration }}</td>
-        <td>{{ $data->id }}</td>
-        <td>{{ $data->nama_kategori }}</td>
-        <td>
-          <a href="{{ route('kategori.edit', $data->id) }}" class="btn btn-warning btn-sm">Edit</a>
-          <form action="{{ route('kategori.destroy', $data->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Yakin ingin menghapus kategori ini?')">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-          </form>
-        </td>
-      </tr>
-      @endforeach
-    </tbody>
-  </table>
+<br>
+<div class="container">
+    <h2>Tabel Kategori</h2>
+    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalTambahKategori">+Tambah Kategori</button>
+    <table class="table table-bordered table stripper" id="tabel-kategori">
+        <thead>
+            <tr>
+                <th style="width:1%">No.</th>
+                <th style="width:5%">ID</th>
+                <th style="width:5%">Nama Kategori</th>
+                <th style="width:10%">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($dataKategori as $data)
+            <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $data->id }}</td>
+                <td>{{ $data->nama_kategori }}</td>
+                <td>
+                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditKategori{{ $data->id }}">Ubah</button>
+                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalHapusKategori{{ $data->id }}">Hapus</button>
+                </td>
+            </tr>
+            @include('kategori.edit', ['data' => $data])
+            @include('kategori.delete', ['data' => $data])
+            @endforeach
+        </tbody>
+    </table>
 </div>
-@endsection
+
+@include('kategori.create')
+
+@stop
+
+@push('scripts')
+<script>
+$(function(){
+    $('#tabel-kategori').DataTable();
+});
+</script>
+@endpush

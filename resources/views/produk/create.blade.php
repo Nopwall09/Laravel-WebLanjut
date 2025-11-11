@@ -10,15 +10,25 @@
             <form action="{{route('produk.store')}}" method="POST">
                 @csrf
                 <div class="modal-body">
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="id" class="form-label">Kode Produk <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="id" id="id" required>
-                    </div>
+                    </div> -->
 
                     <div class="mb-3">
                         <label for="nama_produk" class="form-label">Nama Produk <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="nama_produk" id="nama_produk" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="kategori_id" class="form-label">Kategori <span class="text-danger">*</span></label>
+                        <select name="kategori_id" id="kategori_id" class="form-control" required>
+                            <option value="">-- Pilih Kategori --</option>
+                            @foreach ($kategori as $kat)
+                            <option value="{{ $kat->id }}">{{ $kat->nama_kategori }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
 
                     <div class="mb-3">
                         <label for="harga" class="form-label">Harga <span class="text-danger">*</span></label>

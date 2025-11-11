@@ -1,14 +1,21 @@
-<!-- @extends('layouts.app')
-@section('title', 'Hapus Produk')
-@section('content')
-<div class="container mt-4">
-  <h3>Hapus Produk</h3>
-  <p>Apakah Anda yakin ingin menghapus produk <b>{{ $data->nama_produk }}</b>?</p>
-  <form action="{{ route('produk.destroy', $data->id) }}" method="POST">
-    @csrf
-    @method('DELETE')
-    <button type="submit" class="btn btn-danger">Ya, Hapus</button>
-    <a href="{{ route('produk.index') }}" class="btn btn-secondary">Batal</a>
-  </form>
+<div class="modal fade" id="modalHapusKategori{{ $data->id }}" tabindex="-1" aria-labelledby="modalHapusKategoriLabel{{ $data->id }}" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="modalHapusKategoriLabel{{ $data->id }}">Konfirmasi Hapus</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+      </div>
+      <div class="modal-body">
+        Yakin ingin menghapus kategori <strong>{{ $data->nama_kategori }}</strong>?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+        <form action="{{ route('kategori.destroy', $data->id) }}" method="POST" style="display:inline">
+          @csrf
+          @method('DELETE')
+          <button type="submit" class="btn btn-danger">Yakin</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
-@endsection -->

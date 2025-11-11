@@ -1,17 +1,26 @@
-@extends('layouts.app')
-@section('title', 'Edit Kategori')
-@section('content')
-<div class="container mt-4">
-  <h3>Edit Kategori</h3>
-  <form action="{{ route('kategori.update', $data->id) }}" method="POST">
-    @csrf
-    @method('PUT')
-    <div class="mb-3">
-      <label>Nama Kategori</label>
-      <input type="text" name="nama_kategori" class="form-control" value="{{ $data->nama_kategori }}" required>
+<div class="modal fade" id="modalEditKategori{{ $data->id }}" tabindex="-1" aria-labelledby="modalEditKategoriLabel{{ $data->id }}" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalEditKategoriLabel{{ $data->id }}">Edit Kategori</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <form action="{{ route('kategori.update', $data->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Nama Kategori</label>
+            <input type="text" class="form-control" name="nama_kategori" value="{{ $data->nama_kategori }}" required>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </form>
     </div>
-    <button type="submit" class="btn btn-success">Update</button>
-    <a href="{{ route('kategori.index') }}" class="btn btn-secondary">Kembali</a>
-  </form>
+  </div>
 </div>
-@endsection
