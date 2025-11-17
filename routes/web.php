@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KategoriController;
+use App\Models\Produk;
+use App\Exports\ProdukExport;
 
 // PRODUK
 Route::get('tampil-produk', [ProdukController::class, 'index']);
@@ -10,6 +12,10 @@ Route::get('tambah-produk', [ProdukController::class,'create'])->name('produk.cr
 Route::post('tampil-produk',[ProdukController::class,'store'])->name('produk.store');
 Route::put('/produk/update/{id}',[ProdukController::class,'update'])->name('produk.update');
 Route::delete('/produk/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
+Route::get('/produk/export/excel', [ProdukController::class, 'excel'])->name('produk.excel');
+Route::get('/produk/export/pdf',[ProdukController::class, 'pdf'])->name('produk.pdf');
+Route::get('/produk/chart', [ProdukController::class, 'chart'])->name('produk.chart');
+
 
 // KATEGORI
 Route::get('tampil-kategori', [KategoriController::class, 'index']);

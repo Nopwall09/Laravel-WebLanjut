@@ -4,7 +4,12 @@
 <br>
 <div class="container">
     <h2>Tabel Produk</h2>
-    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalTambahProduk">+Tambah Data</button>
+    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalTambahProduk">Tambah Produk</button>
+    <a href="{{ route('produk.excel') }}" class="btn btn-primary">Excel</a>
+    <a href="{{ route('produk.pdf') }}" class="btn btn-secondary pull-right" target="_blank">PDF</a>
+    <a href="{{ route('produk.chart') }}" class="btn btn-secondary pull-right">Chart</a>
+
+
     <table class="table table-bordered table-striped" id="tabel-produk">
         <thead>
             <tr>
@@ -23,7 +28,7 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $data->id }}</td>
                 <td>{{ $data->nama_produk }}</td>
-                <td>{{ $data->kategori->nama_kategori ?? '-' }}</td>
+                <td>{{ $data->kategori->nama_kategori}}</td>
                 <td>{{ number_format($data->harga, 0, ',', '.') }}</td>
                 <td>{{ $data->stock }}</td>
                 <td>

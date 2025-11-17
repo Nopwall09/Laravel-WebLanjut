@@ -8,7 +8,7 @@
             </div>
 
             <form action="{{route('produk.store')}}" method="POST">
-                @csrf
+                @csrf\
                 <div class="modal-body">
                     <!-- <div class="mb-3">
                         <label for="id" class="form-label">Kode Produk <span class="text-danger">*</span></label>
