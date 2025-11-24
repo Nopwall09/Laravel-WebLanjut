@@ -6,7 +6,7 @@ use App\Exports\ProdukExport;
 use Illuminate\Http\Request;
 use App\Models\Produk;
 use App\Models\Kategori;
-use Maatwebsite\Excel\Facades\Excel;   // ✔ INI YANG HARUS DIPAKAI
+use Maatwebsite\Excel\Facades\Excel;  
 
 class ProdukController extends Controller
 {

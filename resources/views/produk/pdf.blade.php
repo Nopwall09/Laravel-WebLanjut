@@ -35,7 +35,7 @@
                 <td>{{ $data->nama_produk }}</td>
                 <td>{{ $data->kategori->nama_kategori }}</td>
                 <td>{{ number_format($data->harga, 0, ',', '.') }}</td>
-                <td>{{ $data->stok }}</td>
+                <td>{{ $data->stock }}</td>
             </tr>
             @endforeach
         </tbody>

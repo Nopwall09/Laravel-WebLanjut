@@ -5,21 +5,42 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KategoriController;
 use App\Models\Produk;
 use App\Exports\ProdukExport;
+use App\Http\Controllers\Laporan;
+
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('home', function () {
+    return view('home');  
+})->name('home');
+
 
 // PRODUK
-Route::get('tampil-produk', [ProdukController::class, 'index']);
-Route::get('tambah-produk', [ProdukController::class,'create'])->name('produk.create');
-Route::post('tampil-produk',[ProdukController::class,'store'])->name('produk.store');
-Route::put('/produk/update/{id}',[ProdukController::class,'update'])->name('produk.update');
-Route::delete('/produk/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
-Route::get('/produk/export/excel', [ProdukController::class, 'excel'])->name('produk.excel');
-Route::get('/produk/export/pdf',[ProdukController::class, 'pdf'])->name('produk.pdf');
-Route::get('/produk/chart', [ProdukController::class, 'chart'])->name('produk.chart');
-
+// midleware admin
+Route::middleware(['auth','admin'])->group(function () {
+    Route::get('tampil-produk', [ProdukController::class, 'index']);
+    Route::get('tambah-produk', [ProdukController::class,'create'])->name('produk.create');
+    Route::post('tampil-produk',[ProdukController::class,'store'])->name('produk.store');
+    Route::put('/produk/update/{id}',[ProdukController::class,'update'])->name('produk.update');
+    Route::delete('/produk/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
+    Route::get('/produk/export/excel', [ProdukController::class, 'excel'])->name('produk.excel');
+    Route::get('/produk/export/pdf',[ProdukController::class, 'pdf'])->name('produk.pdf');
+    Route::get('/produk/chart', [ProdukController::class, 'chart'])->name('produk.chart');
+});
 
 // KATEGORI
-Route::get('tampil-kategori', [KategoriController::class, 'index']);
-Route::get('tambah-kategori', [KategoriController::class,'create'])->name('kategori.create');
-Route::post('tampil-kategori',[KategoriController::class,'store'])->name('kategori.store');
-Route::put('/kategori/update/{id}',[KategoriController::class,'update'])->name('kategori.update');
-Route::delete('/kategori/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
+// midleware admin
+    Route::middleware(['auth','admin'])->group(function () {
+    Route::get('tampil-kategori', [KategoriController::class, 'index']);
+    Route::get('tambah-kategori', [KategoriController::class,'create'])->name('kategori.create');
+    Route::post('tampil-kategori',[KategoriController::class,'store'])->name('kategori.store');
+    Route::put('/kategori/update/{id}',[KategoriController::class,'update'])->name('kategori.update');
+    Route::delete('/kategori/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
+});
+
+//midleware kasir
+Route::middleware(['auth','kasir'])->group(function () {
+    Route::get('tampil-laporan', [Laporan::class, 'index']);
+});

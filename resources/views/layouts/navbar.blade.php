@@ -19,8 +19,28 @@
           <a class="nav-link {{ Request::is('transaksi') ? 'active' : '' }}" href="{{ url('transaksi') }}">Transaksi</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ Request::is('laporan') ? 'active' : '' }}" href="{{ url('laporan') }}">Laporan</a>
+          <a class="nav-link {{ Request::is('tampil-laporan') ? 'active' : '' }}" href="{{ url('tampil-laporan') }}">Laporan</a>
         </li>
+        @auth
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                {{ Auth::user()->name }}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="route('profile')">Profile</a></li>
+                <li>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="dropdown-item">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    @else
+        <a href="{{ route('login') }}">Login</a> | <a href="{{ route('register') }}">Register</a>
+    @endauth
+
       </ul>
     </div>
   </div>

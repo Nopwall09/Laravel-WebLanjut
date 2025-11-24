@@ -3,8 +3,10 @@
 namespace App\Exports;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+
 use App\Models\Produk;
-class ProdukExport implements FromCollection
+class ProdukExport implements FromCollection, WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -15,10 +17,13 @@ class ProdukExport implements FromCollection
     }
     public function headings() : array{
         return[
+            'ID',
             'Nama Produk',
             'Kategori',
             'Harga',
             'Stock',
+            'Created At',
+            'Updated At'
         ];
     }
 }
